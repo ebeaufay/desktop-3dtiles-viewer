@@ -10,5 +10,6 @@ download [here](https://github.com/ebeaufay/desktop-3dtiles-viewer/releases/tag/
 ![image](https://github.com/ebeaufay/desktop-3dtiles-viewer/assets/16924300/d392020c-c391-420d-8d15-82e986d7ac8b)
 
 ## 3DTiles converter
-contact@jdultra.com if there's interest in a 3DTiles converter for IFC, glTF, COLLADA, OBJ and more.
+I also make a 3DTiles converter for IFC, glTF, COLLADA, OBJ and more.
 No size limit, optimized for streaming and high visual quality conversions.
+contact me at contact@jdultra.com
