@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.jdultra" "\0"
-            VALUE "FileDescription", "desktop_3d_tiles_viewer" "\0"
+            VALUE "FileDescription", "desktop_3dtiles_viewer" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "desktop_3d_tiles_viewer" "\0"
+            VALUE "InternalName", "desktop_3dtiles_viewer" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.jdultra. All rights reserved." "\0"
-            VALUE "OriginalFilename", "desktop_3d_tiles_viewer.exe" "\0"
-            VALUE "ProductName", "desktop_3d_tiles_viewer" "\0"
+            VALUE "OriginalFilename", "desktop_3dtiles_viewer.exe" "\0"
+            VALUE "ProductName", "desktop_3dtiles_viewer" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

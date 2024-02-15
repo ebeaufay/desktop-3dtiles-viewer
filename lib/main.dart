@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:desktop_3d_tiles_viewer/AssetsHttpServer.dart';
-import 'package:desktop_3d_tiles_viewer/LocalHttpServer.dart';
+import 'package:desktop_3dtiles_viewer/AssetsHttpServer.dart';
+import 'package:desktop_3dtiles_viewer/LocalHttpServer.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_windows/webview_windows.dart';
 import 'package:file_picker/file_picker.dart';
