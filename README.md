@@ -3,4 +3,4 @@
 
 A windows 3DTiles viewer. Great for inspecting the result of a conversion.
 
-The app is based on this [library](https://github.com/ebeaufay/threedtiles) and three.js.
+The app is based on this [library](https://github.com/ebeaufay/threedtiles) to decode 3DTiles and uses three.js as a viewer.
