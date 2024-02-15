@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Three 3DTiles viewer getting started</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+      overflow-y: scroll;
+      /* Add scroll to the div */
+    }
+
+    .fa-cog {
+      position: fixed;
+      top: 2%;
+      right: 2%;
+      font-size: 400%;
+      cursor: pointer;
+      z-index: 25;
+      /* Ensure the icon is above the sideDiv */
+    }
+
+    .sideDiv {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      /* Start hidden to the right */
+      width: 300px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.99);
+      border-radius: 5px 0 0 5px;
+      transition: right 0.5s;
+      /* Smooth transition for sliding */
+      z-index: 24;
+
+      /* High z-index to overlay content */
+    }
+
+    .sideDivContent {
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      top: 10%;
+      height: 90%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      position: relative;
+    }
+
+    /* Keyframes for slide-in */
+    @keyframes slideIn {
+      from {
+        right: -300px;
+      }
+
+      to {
+        right: 0;
+      }
+    }
+
+    /* Keyframes for slide-out */
+    @keyframes slideOut {
+      from {
+        right: 0;
+      }
+
+      to {
+        right: -300px;
+      }
+    }
+
+
+    .switch-holder {
+      display: flex;
+      width: 80%;
+      height: 20px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: -8px -8px 15px rgba(255, 255, 255, .7),
+        10px 10px 10px rgba(0, 0, 0, .3),
+        inset 8px 8px 15px rgba(255, 255, 255, .7),
+        inset 10px 10px 10px rgba(0, 0, 0, .3);
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .switch-label {
+      width: 150px;
+    }
+
+    .switch-label i {
+      margin-right: 5px;
+    }
+
+    .switch-toggle {
+      height: 18px;
+    }
+
+    .switch-toggle input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      z-index: -2;
+    }
+
+    .switch-toggle input[type="checkbox"]+label {
+      position: relative;
+      display: inline-block;
+      width: 100px;
+      height: 18px;
+      border-radius: 9px;
+      margin: 0;
+      cursor: pointer;
+      box-shadow: inset -8px -8px 15px rgba(255, 255, 255, .6),
+        inset 10px 10px 10px rgba(0, 0, 0, .25);
+
+    }
+
+    .switch-toggle input[type="checkbox"]+label::before {
+      position: absolute;
+      content: 'OFF';
+      font-size: 13px;
+      text-align: center;
+      line-height: 18px;
+      top: 2px;
+      left: 8px;
+      width: 45px;
+      height: 15px;
+      border-radius: 20px;
+      background-color: #d1dad3;
+      box-shadow: -3px -3px 5px rgba(255, 255, 255, .5),
+        3px 3px 5px rgba(0, 0, 0, .25);
+      transition: .3s ease-in-out;
+    }
+
+    .switch-toggle input[type="checkbox"]:checked+label::before {
+      left: 50%;
+      content: 'ON';
+      color: #fff;
+      background-color: #00b33c;
+      box-shadow: -3px -3px 5px rgba(255, 255, 255, .5),
+        3px 3px 5px #00b33c;
+    }
+
+    .slider-holder {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: -8px -8px 15px rgba(255, 255, 255, .7),
+        10px 10px 10px rgba(0, 0, 0, .3),
+        inset 8px 8px 15px rgba(255, 255, 255, .7),
+        inset 10px 10px 10px rgba(0, 0, 0, .3);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slider-label {
+      font-size: 16px;
+      color: #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+    }
+
+    .range-slider {
+      width: 100%;
+      height: 20px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: inset -8px -8px 15px rgba(255, 255, 255, .6),
+        inset 10px 10px 10px rgba(0, 0, 0, .25);
+    }
+
+    .range-slider input[type="range"] {
+      width: 100%;
+      height: 35px;
+      background: transparent;
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .range-slider input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 45px;
+      height: 15px;
+      border-radius: 8px;
+      background: #d1dad3;
+      cursor: pointer;
+      box-shadow: -3px -3px 5px rgba(255, 255, 255, .5),
+        3px 3px 5px rgba(0, 0, 0, .25);
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .range-slider input[type="range"]::-webkit-slider-thumb:hover {
+      background: #bcd9c4;
+    }
+
+    .range-slider input[type="range"]:focus::-webkit-slider-thumb {
+      background: #00b33c;
+    }
+
+    .slider-holder {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 20px 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "../build/three.module.js",
+        "three/addons/": "./jsm/",
+        "three/nodes": "./jsm/nodes/Nodes.js"
+      }
+    }
+  </script>
+
+  <div id="screen"></div>
+  <!-- <button id="show_grid" style="top:5%;right:5%;width:60px;height:60px;position:absolute;z-index:25;">Grid</button> -->
+
+  <i class="fa fa-cog" aria-hidden="true" id="toggleBtn"></i>
+  <div class="sideDiv" id="sideDiv">
+    <div class="sideDivContent">
+
+
+
+      <div class="section">
+        <div style="margin-bottom: 10px;">
+          Tileset
+        </div>
+
+        <div class="slider-holder">
+          <div class="slider-label">Detail Multiplier <span id="rangeValue">1.0</span></div>
+          <div class="range-slider">
+            <input type="range" id="detailMultiplier" min="0" max="4" value="1" step="0.1">
+          </div>
+        </div>
+
+        
+        <div class="switch-holder" title="Load low detail tiles outside view so that basic mesh is present when panning and better shadows cast by objects outside view">
+          <div class="switch-label">
+            <i class="fa-regular fa-star-half-stroke"></i><span>LoadOutsideView</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="loadOutsideView" checked>
+            <label for="loadOutsideView"></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div style="margin-bottom: 10px;">
+          Visuals
+        </div>
+
+        <div class="switch-holder">
+          <div class="switch-label">
+            <i class="fa fa-border-all"></i><span>Grid</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="show_grid" checked>
+            <label for="show_grid"></label>
+          </div>
+        </div>
+
+        <div class="switch-holder">
+          <div class="switch-label">
+            <i class="fa-solid fa-umbrella-beach"></i><span>Shadows</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="shadows" checked>
+            <label for="shadows"></label>
+          </div>
+        </div>
+
+        <div class="switch-holder">
+          <div class="switch-label">
+            <i class="fa-solid fa-droplet"></i><span>Ambient Occlusion</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="ao" checked>
+            <label for="ao"></label>
+          </div>
+        </div>
+
+        <div class="switch-holder">
+          <div class="switch-label">
+            <i class="fa-solid fa-explosion"></i><span>Bloom</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="bloom" checked>
+            <label for="bloom"></label>
+          </div>
+        </div>
+
+        <div class="switch-holder">
+          <div class="switch-label">
+            <i class="fa-solid fa-highlighter"></i><span>Outline</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="outline">
+            <label for="outline"></label>
+          </div>
+        </div>
+
+        <div class="slider-holder">
+          <div class="slider-label">Sun Elevation<span id="sunElevationValue">70.0</span></div>
+          <div class="range-slider">
+            <input type="range" id="sunElevation" min="0" max="90" value="70" step="0.1">
+          </div>
+        </div>
+
+        <div class="slider-holder">
+          <div class="slider-label">Sun Azimuth<span id="sunAzimuthValue">1.0</span></div>
+          <div class="range-slider">
+            <input type="range" id="sunAzimuth" min="0" max="360" value="0" step="0.1">
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+  <script>
+    document.getElementById('toggleBtn').addEventListener('click', function () {
+      var sideDiv = document.getElementById('sideDiv');
+      sideDiv.classList.toggle('shown');
+
+      if (sideDiv.classList.contains('shown')) {
+        // If the div is shown, apply the slide in animation
+        sideDiv.style.animation = 'slideIn 0.5s forwards';
+      } else {
+        // If the div is not shown, apply the slide out animation
+        sideDiv.style.animation = 'slideOut 0.5s forwards';
+      }
+    });
+  </script>
+<script src="index.js"></script></body>
+
+</html>
