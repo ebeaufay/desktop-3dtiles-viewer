@@ -286,7 +286,50 @@
             <label for="loadOutsideView"></label>
           </div>
         </div>
+
+        <div style="margin-bottom: 0px;">
+          Mesh
+        </div>
+        <div class="switch-holder" title="Load low detail tiles outside view so that basic mesh is present when panning and better shadows cast by objects outside view">
+          <div class="switch-label">
+            <i class="fa-solid fa-border-top-left"></i><span>Wireframe</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="wireframe">
+            <label for="wireframe"></label>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 0px;">
+          Points
+        </div>
+        <div class="slider-holder">
+          <div class="slider-label">Point size<span id="pointSizeValue">2.0</span></div>
+          <div class="range-slider">
+            <input type="range" id="pointSize" min="0.1" max="5" value="2" step="0.1">
+          </div>
+        </div>
+
+        <div class="switch-holder" title="Load low detail tiles outside view so that basic mesh is present when panning and better shadows cast by objects outside view">
+          <div class="switch-label">
+            <i class="fa-solid fa-arrows-to-circle"></i><span>Adaptive Size</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="adaptive" checked>
+            <label for="adaptive"></label>
+          </div>
+        </div>
+        <!-- <div class="switch-holder" title="Load low detail tiles outside view so that basic mesh is present when panning and better shadows cast by objects outside view">
+          <div class="switch-label">
+            <i class="fa-brands fa-uncharted"></i><span>Y-up</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="yup">
+            <label for="yup"></label>
+          </div>
+        </div> -->
       </div>
+
 
       <div class="section">
         <div style="margin-bottom: 10px;">

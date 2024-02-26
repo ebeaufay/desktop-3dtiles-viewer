@@ -30,8 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  webview_windows: ^0.3.0
-  http: ^1.1.2
+  webview_windows: ^0.4.0
+  http: ^1.2.1
   file_picker: ^6.1.1
 
 
