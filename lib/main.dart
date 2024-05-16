@@ -4,13 +4,14 @@ import 'package:desktop_3dtiles_viewer/LocalHttpServer.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_windows/webview_windows.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,12 +19,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -32,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _webviewController = WebviewController();
   bool isWebViewReady = false; // New state variable
 
-  String _filePath = '';
+  final String _filePath = '';
 
   AssetsHttpServer? webPageServer;
   HttpServer? tilesetServer;
@@ -103,14 +106,14 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Stack(
         children: [
           // Directly use WebView without Expanded
-          isWebViewReady ? Webview(_webviewController) : Center(child: CircularProgressIndicator()),
+          isWebViewReady ? Webview(_webviewController) : const Center(child: CircularProgressIndicator()),
           // Custom invisible button with icon
           Positioned(
             top: 20, // Adjust these values according to your layout
             left: 20,
             child: InkWell(
               onTap: _pickFile,
-              child: Icon(Icons.folder_open, size: 64.0, color: Colors.black), // Customize icon size and color
+              child: const Icon(Icons.folder_open, size: 64.0, color: Colors.black), // Customize icon size and color
             ),
           ),
         ],

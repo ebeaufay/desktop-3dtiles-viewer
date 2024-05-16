@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class AssetsHttpServer {
-  HttpServer _server;
+  final HttpServer _server;
 
   static ContentType _getContentTypeForPath(String path) {
     final extension = path.split('.').last;
@@ -40,7 +40,7 @@ class AssetsHttpServer {
       return AssetsHttpServer._(server);
     } on SocketException catch (e) {
       print('Failed to start server: $e');
-      throw e;
+      rethrow;
     }
   }
 

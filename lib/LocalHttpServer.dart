@@ -33,7 +33,7 @@ class LocalHttpServer {
       return server;
     } on SocketException catch (e) {
       print('Failed to start server: $e');
-      throw e;
+      rethrow;
     }
   }
 }

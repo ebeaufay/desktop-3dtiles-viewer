@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <title>Three 3DTiles viewer getting started</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -274,10 +275,20 @@
           Tileset
         </div>
 
+        <div class="switch-holder" title="Load low detail tiles outside view so that basic mesh is present when panning and better shadows cast by objects outside view">
+          <div class="switch-label">
+            <i class="fa-solid fa-rotate-right"></i><span>Z-UP</span>
+          </div>
+          <div class="switch-toggle">
+            <input type="checkbox" id="zup" checked>
+            <label for="zup"></label>
+          </div>
+        </div>
+
         <div class="slider-holder">
           <div class="slider-label">Detail Multiplier <span id="rangeValue">1.0</span></div>
           <div class="range-slider">
-            <input type="range" id="detailMultiplier" min="0" max="4" value="1" step="0.1">
+            <input type="range" id="detailMultiplier" min="0.0" max="2" value="1" step="0.01">
           </div>
         </div>
 
@@ -287,7 +298,7 @@
             <i class="fa-regular fa-star-half-stroke"></i><span>LoadOutsideView</span>
           </div>
           <div class="switch-toggle">
-            <input type="checkbox" id="loadOutsideView" checked>
+            <input type="checkbox" id="loadOutsideView" >
             <label for="loadOutsideView"></label>
           </div>
         </div>
