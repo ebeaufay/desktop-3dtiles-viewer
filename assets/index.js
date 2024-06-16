@@ -115866,8 +115866,10 @@ const stats = new three_examples_jsm_libs_stats_module_js__WEBPACK_IMPORTED_MODU
 domContainer.appendChild(stats.dom);
 const camera = initCamera(domContainer.offsetWidth, domContainer.offsetHeight);
 const scene = initScene();
-const axesHelper = new THREE.AxesHelper(5000);
-scene.add(axesHelper);
+
+//const axesHelper = new THREE.AxesHelper( 5000 );
+//scene.add( axesHelper );
+
 const renderer = initRenderer(camera, domContainer);
 const composer = initComposer(scene, camera, renderer);
 const tileLoader = initTileLoader();
@@ -116015,7 +116017,7 @@ function initTileset(scene) {
   const ogc3DTile = new _jdultra_threedtiles__WEBPACK_IMPORTED_MODULE_2__.OGC3DTile({
     //url: "https://storage.googleapis.com/ogc-3d-tiles/nyc/tileset.json",
     url: "http://localhost:8990/tileset.json",
-    //url: "http://localhost:8080/tileset_local_transform.json",
+    //url: "http://localhost:8080/tileset.json",
     //url: "https://storage.googleapis.com/rg-inserts/n1601-n12618/Utah_StGeorge_GreenValley_MoesValley_Teepee_200k/tileset.json",
     geometricErrorMultiplier: _isMobileDevice() ? 0.1 : 1.0,
     // a detail multiplier [0 - infinity] (optional)
@@ -116194,7 +116196,7 @@ function initScene() {
       ambient.intensity = 1;
     } else {
       csm.maxFar = 0;
-      ambient.intensity = 4;
+      ambient.intensity = 1;
     }
   });
   /* csmHelper = new CSMHelper(csm);
@@ -116253,8 +116255,8 @@ function initRenderer(camera, dom) {
   //renderer.shadowMap.enabled = true
   //renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
-  renderer.toneMapping = THREE.AgXToneMapping;
-  renderer.toneMappingExposure = 90000.5;
+  //renderer.toneMapping = THREE.AgXToneMapping;
+  //renderer.toneMappingExposure = 1;
   dom.appendChild(renderer.domElement);
   onWindowResize();
   window.addEventListener('resize', onWindowResize);
